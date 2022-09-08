@@ -1,0 +1,30 @@
+
+body{
+    max-width: 75%;
+    margin:0;
+    margin:0 auto;
+}
+.main > *{min-width:100%;}
+p{
+    margin:0 auto;
+    max-width: fit-content;
+}
+iframe{
+    min-height: 75%;
+}
+.hold{
+    display: flex;
+}
+form{
+    margin: 0 auto;
+    text-align: center;
+}
+.incompleteTask,.completeTask{
+    color:transparent;
+}
+.incompleteTask{
+    background-color: red;
+}
+.completeTask{
+    background-color: green;
+}
