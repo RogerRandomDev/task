@@ -19,17 +19,18 @@ const createTask = (req,res)=>{
 
 const completeTask= (req,res)=>{
     const {id} = req.body
-    console.log(id)
     if(id<tasks.length){tasks[id].completed=!tasks[id].completed
-        console.log(tasks)
         return res.status(201).send(buildList(tasks,res))
-
+        res.status(404).send(buildList(tasks,res))
     }
     //if(id){tasks=tasks.filter(e=>e.id!=id);return res.status(201).send(buildList(tasks,res))}
     res.status(404).send(buildList(tasks,res))
     
 }
+const deleteTasks= (req,res)=>{
+    
+    tasks=tasks.filter(e=>!e.completed);return res.status(201).send(buildList(tasks,res))
+}
 
 
-
-module.exports={readTasks,createTask,completeTask,tasks}
+module.exports={readTasks,createTask,completeTask,tasks,deleteTasks}
