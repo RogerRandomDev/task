@@ -6,18 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./style.css">
+    <script src="./script.js"></script>
 </head>
 <body class="main">
-    <iframe src="/inputList"></iframe>
-    <form action="/addInput" method="POST">
+    <div id="iframe"></div>
         <div class="form-row">
           <label for="name"> enter task </label>
           <input type="text" name="name" id="name" autocomplete="false" />
         </div>
-        <button type="submit" class="block">submit</button>
-      </form>
-      <form action="/removeTasks" method="POST">
-        <button type="submit" class="block">Remove Complete Tasks</button>
-      </form>
+      <button class="block" onmousedown="addToList()">submit</button>
+    <button class="block" onmousedown="removeComplete()">Remove Complete Tasks</button>
+    
 </body>
 </html>

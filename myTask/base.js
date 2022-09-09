@@ -1,29 +1,25 @@
 const express=require('express');
 const app=express();
-const {router, del}=require('./createTask')
-
-const {tasks}=require('./middleware/taskreader')
+const {router}=require('./createTask')
 const {buildList}=require('./data')
 const port = 3000;
 //builds the list as html
-app.get('/inputList', (req,res)=> {
-    buildList("",res)
-})
-
+app.get('/inputList', (req,res)=> {buildList("",res)})
+//removal of items
+app.use(express.text())
+app.post("/removeTask",router)
+app.post("/completeTask",router)
+app.post("/addInput",router)
 
 //static assets
 
 app.use(express.static("./public"))
 
 //parse form data
-app.use(express.urlencoded({extended:false}))
+
 //parse json
 app.use(express.json({json:true}))
 
-//removal of items
-app.use("/completeTask",router)
-app.use("/addInput",router)
-app.use('/removeTasks',del)
 
 
 
