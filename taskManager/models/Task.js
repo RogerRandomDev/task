@@ -13,5 +13,5 @@ const TaskSchema = new mongoose.Schema({
     }
 })
 
-module.exports=mongoose.model("Task",TaskSchema)
-Model.find({completed:true})
+module.exports=mongoose.model("taskManager",TaskSchema)
+//Model.find({completed:true})
