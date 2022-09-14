@@ -2,7 +2,7 @@ const express=require('express');
 const app=express();
 const {router}=require('./middleware/createTask')
 const {buildList}=require('./data')
-const {preload}=require('./populate')
+const {preload}=require('./controllers/controller')
 const port = 3000;
 //builds the list as html
 app.get('/inputList', (req,res)=> {buildList("",res)})

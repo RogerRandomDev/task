@@ -1,9 +1,9 @@
 require('dotenv').config()
 
-const connectDB = require('./db/connect')
-const Product = require('./models/Task')
-const jsonProducts = require('./products.json')
-let {tasks}=require("./data")
+const connectDB = require('../db/connect')
+const Product = require('../models/Task')
+const jsonProducts = require('../products.json')
+let {tasks}=require("../data")
 
 const start = async () => {
     tasks=[]
@@ -36,12 +36,14 @@ const update = async (taskData)=>{
 start()
 //the taskreader moved here because it needs to be here to prevent cyclic reccursion
 const { response } = require("express")
-let {IID,buildList,updateTasks}= require("./data")
+let {IID,buildList,updateTasks}= require("../data")
+//updates the task info in the data file
 const updateTask=(inp)=>{tasks=inp;updateTasks(inp)}
 const readTasks = (req,res)=>{
     
     return res.status(201).json(tasks)
 }
+//make a new task
 const createTask = (req,res)=>{
     
     const {name,id} = JSON.parse(req.body)
@@ -49,6 +51,7 @@ const createTask = (req,res)=>{
     if(name){
         tasks.push({name:name,completed:false})
         let usedNames=[]
+        //prevents duplicates
         tasks=tasks.filter((e)=>{if(usedNames.includes(e.name)){return false}else{usedNames.push(e.name);return true}})
         updateTask(tasks)
         update(tasks)
@@ -57,7 +60,7 @@ const createTask = (req,res)=>{
     
     res.status(404).json({success:false,msg:"Please provide a name"})
 }
-
+//swaps between complete and incomplete
 const completeTask= (req,res)=>{
     
     const {id} = JSON.parse(req.body)
@@ -72,6 +75,7 @@ const completeTask= (req,res)=>{
     buildList(tasks,res)
     
 }
+//removes completed tasks
 const deleteTasks= (req,res)=>{
     let usedNames=[]
     tasks=tasks.filter(e=>!e.completed);
@@ -81,6 +85,7 @@ const deleteTasks= (req,res)=>{
     buildList(tasks,res)
     
 }
+//grabs list from database
 const preload=()=>{start();}
 
 module.exports ={start,update,readTasks,createTask,completeTask,deleteTasks,updateTask,preload};

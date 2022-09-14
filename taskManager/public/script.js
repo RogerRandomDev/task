@@ -36,8 +36,7 @@ function completeTask(id){
     }}
     l.open("POST", "http://localhost:3000/completeTask",true);
     l.setRequestHeader("Content-Type", "text/plain");
-    l.send(JSON.stringify({
-        id:id}));
+    l.send(JSON.stringify({id:id}));
 }
 const removeComplete=()=>{
     var l = new XMLHttpRequest();
